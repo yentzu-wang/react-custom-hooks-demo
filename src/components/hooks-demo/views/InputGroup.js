@@ -15,6 +15,7 @@ const InputGroup = ({ fieldName }) => {
           "demo__input-group__input--focus": focus
         })}
         type="text"
+        autoComplete="off"
         {...formInput}
       />
     </div>

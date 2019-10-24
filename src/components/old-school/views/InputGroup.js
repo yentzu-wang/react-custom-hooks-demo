@@ -31,6 +31,7 @@ class InputGroup extends Component {
           }}
           onFocus={() => this.setState({ focus: true })}
           onBlur={() => this.setState({ focus: false })}
+          autoComplete="off"
         />
       </div>
     )
