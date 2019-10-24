@@ -1,15 +1,30 @@
 import React, { Component } from "react"
-import InputGroup from "./InputGroup"
+import { connect } from "react-redux"
+import FormWrapper from "./FormWrapper"
 
-export default class OldSchoolDemo extends Component {
+class OldSchoolDemo extends Component {
   render() {
     return (
       <div className="demo">
         Class:
-        <InputGroup fieldName="Name" />
-        <InputGroup fieldName="Address" />
-        <button onClick={() => alert("test")}>Get Data</button>
+        <FormWrapper />
+        <button
+          onClick={() =>
+            alert(`name: ${this.props.name}, address: ${this.props.address}`)
+          }
+        >
+          Get Data
+        </button>
       </div>
     )
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    name: state.demo.name,
+    address: state.demo.address
+  }
+}
+
+export default connect(mapStateToProps)(OldSchoolDemo)

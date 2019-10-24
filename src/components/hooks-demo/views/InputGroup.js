@@ -1,14 +1,15 @@
-import React from "react"
+import React, { useContext } from "react"
 import classnames from "classnames"
+import HooksContext from "../HooksContext"
 
-const InputGroup = ({ fieldName, data }) => {
-  const { focus, ...formInput } = data
+const InputGroup = ({ fieldName }) => {
+  const {
+    [fieldName.toLowerCase()]: { focus, ...formInput }
+  } = useContext(HooksContext)
 
   return (
     <div className="demo__input-group">
-      <label className="demo__input-group__label" for="film">
-        {fieldName}:
-      </label>
+      <label className="demo__input-group__label">{fieldName}:</label>
       <input
         className={classnames("demo__input-group__input", {
           "demo__input-group__input--focus": focus

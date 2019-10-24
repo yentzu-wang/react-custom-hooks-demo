@@ -1,5 +1,7 @@
 import React, { Component } from "react"
+import { connect } from "react-redux"
 import classnames from "classnames"
+import { updateAddress, updateName } from "../actions"
 
 class InputGroup extends Component {
   state = { value: "", focus: false }
@@ -9,16 +11,24 @@ class InputGroup extends Component {
 
     return (
       <div className="demo__input-group">
-        <label className="demo__input-group__label" for="film">
-          {fieldName}:
-        </label>
+        <label className="demo__input-group__label">{fieldName}:</label>
         <input
           className={classnames("demo__input-group__input", {
             "demo__input-group__input--focus": this.state.focus
           })}
           type="text"
-          value={this.state.value}
-          onChange={e => this.setState({ value: e.target.value })}
+          value={
+            fieldName.toLowerCase() === "name"
+              ? this.props.name
+              : this.props.address
+          }
+          onChange={e => {
+            if (fieldName.toLowerCase() === "name") {
+              this.props.updateName(e.target.value)
+            } else {
+              this.props.updateAddress(e.target.value)
+            }
+          }}
           onFocus={() => this.setState({ focus: true })}
           onBlur={() => this.setState({ focus: false })}
         />
@@ -27,4 +37,19 @@ class InputGroup extends Component {
   }
 }
 
-export default InputGroup
+const mapStateToProps = state => {
+  return {
+    name: state.demo.name,
+    address: state.demo.address
+  }
+}
+
+const mapDispatchToProps = {
+  updateAddress,
+  updateName
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(InputGroup)
