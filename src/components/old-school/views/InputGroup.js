@@ -4,7 +4,8 @@ import classnames from "classnames"
 import { updateAddress, updateName } from "../actions"
 
 class InputGroup extends Component {
-  state = { value: "", focus: false }
+  // focus為純內部狀態，用來控制Input onFocus/onBlur的變色與否
+  state = { focus: false }
 
   render() {
     const { fieldName } = this.props
